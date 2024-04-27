@@ -44,21 +44,21 @@ export default function App() {
 
   const scrollActiveIndex = (index: any) => {
     setActiveIndex(index);
-    // topRef?.current?.scrollToOffset({
-    //   offset: index * width,
-    //   animated: true,
-    // });
-    // if (index * (imageSize + inGap) - imageSize / 2 > width / 2) {
-    //   thumbRef?.current?.scrollToOffset({
-    //     offset: index * (imageSize + inGap) - width / 2 + imageSize / 2,
-    //     animated: true,
-    //   });
-    // } else {
-    //   thumbRef?.current?.scrollToOffset({
-    //     offset: 0,
-    //     animated: true,
-    //   });
-    // }
+    topRef?.current?.scrollToOffset({
+      offset: index * width,
+      animated: true,
+    });
+    if (index * (imageSize + inGap) - imageSize / 2 > width / 2) {
+      thumbRef?.current?.scrollToOffset({
+        offset: index * (imageSize + inGap) - width / 2 + imageSize / 2,
+        animated: true,
+      });
+    } else {
+      thumbRef?.current?.scrollToOffset({
+        offset: 0,
+        animated: true,
+      });
+    }
   };
 
   if (!images) {
@@ -67,7 +67,7 @@ export default function App() {
 
   // console.log(images);
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={styles.root}>
       <FlatList
         ref={topRef}
         data={images}
@@ -95,7 +95,7 @@ export default function App() {
         data={images}
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ position: "absolute", bottom: imageSize }}
+        style={styles.second}
         contentContainerStyle={{ paddingHorizontal: inGap }}
         renderItem={({ item, index }) => {
           return (
@@ -118,3 +118,11 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  second: { position: "absolute", bottom: imageSize },
+});
